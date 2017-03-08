@@ -184,23 +184,31 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
     public long consultarMultaAlquiler(int iditem,Date fechaDevolucion) throws ExcepcionServiciosAlquiler{
         if (!itemsrentados.containsKey(iditem)){
             throw new ExcepcionServiciosAlquiler("El item "+iditem+"no esta en alquiler");
-        }
-        else{
+        }else{
             ItemRentado ir=itemsrentados.get(iditem);
             
             LocalDate fechaMinimaEntrega=ir.getFechafinrenta().toLocalDate();
             LocalDate fechaEntrega=fechaDevolucion.toLocalDate();
             long diasRetraso = ChronoUnit.DAYS.between(fechaMinimaEntrega, fechaEntrega);
-            return diasRetraso*MULTA_DIARIA;
+            if(diasRetraso<0){
+                return 0;
+            }else{
+                return diasRetraso*MULTA_DIARIA;
+            }
+            
         }
     }
 
     
     @Override
     public long consultarCostoAlquiler(int iditem, int numdias) throws ExcepcionServiciosAlquiler {
+        
         if (!itemsDisponibles.containsKey(iditem)) {
             throw new ExcepcionServiciosAlquiler("El item " + iditem + " no esta disponible.");
-        } else {
+        } else if(numdias<=0){
+            return 0;
+        }
+        else {
             return itemsDisponibles.get(iditem).getTarifaxDia()*numdias;
         }
 

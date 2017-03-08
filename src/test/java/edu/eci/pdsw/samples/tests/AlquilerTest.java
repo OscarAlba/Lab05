@@ -99,10 +99,10 @@ public class AlquilerTest {
      * Frontera: CF2: El costo un item con (0) unidades debe ser 0.
      * 
      * Clases de equivalencia: 
-     * CE4: Costo de items menores a 0 unidades (0)
+     * CE4: Costo de items menores a 0 dias (0)
      * 
      * Clases de equivalencia: 
-     * CE3: Costo de items mayores a 0 unidades (costo*unidades)
+     * CE3: Costo de items mayores a 0 dias (costo*unidades)
      */
     @Test
     public void CF2Test() throws ExcepcionServiciosAlquiler{
@@ -113,15 +113,15 @@ public class AlquilerTest {
         sa.registrarItem(i2);
                 
         Item item=sa.consultarItem(2);
-        //prueba: el costo de 0 unidades
-        assertEquals("0 unidades de un item debe ser 0 en el costo",0,sa.consultarCostoAlquiler(2,0));
+        //prueba: el costo de 0 dias
+        assertEquals("0 dias de alquiler de un item debe ser 0 en el costo",0,sa.consultarCostoAlquiler(2,0));
                 
     }
     
     /**
      * Consultar costo de alquiler de un Item:
      * Clases de equivalencia: 
-     * CE4: Costo de items menores a 0 unidades (0)
+     * CE4: Costo de items menores a 0 dias (0)
      */
     @Test
     public void CE4Test() throws ExcepcionServiciosAlquiler{
@@ -132,9 +132,9 @@ public class AlquilerTest {
         sa.registrarItem(i2);
                 
         Item item=sa.consultarItem(3);
-        //prueba: el costo de 0 unidades
+        //prueba: el costo de 0 dias
         assertEquals("El costo se calcula incorrectamente "+
-                "-1 unidades de un item debe ser 0 en el costo o un valor incorrecto"
+                "-1 0 dias de alquiler de un item debe ser 0 en el costo"
                 ,0,sa.consultarCostoAlquiler(3,-1));
                 
     }
@@ -154,7 +154,7 @@ public class AlquilerTest {
         Item item=sa.consultarItem(4);
         //prueba: el costo de 3 unidades
         assertEquals("El costo se calcula incorrectamente "+
-                "unidades de un item debe ser 0 en el costo o un valor incorrecto"
+                "0 dias de alquiler de un item debe ser 0 en el costo"
                 ,3000*3,sa.consultarCostoAlquiler(4,3));
                 
     }
@@ -208,7 +208,7 @@ public class AlquilerTest {
      * Registrar Alquiler a un cliente:
      * 
      * Clases de equivalencia: 
-     * CE7: El alquiler del item no es valido 
+     * CE7: El alquiler del item no es valido
      */
     
     @Test
@@ -228,6 +228,34 @@ public class AlquilerTest {
         }finally{
             assertEquals("El cliente no se registro correctamente",true,ex!=null);
         }
+        
+    }
+    
+    /**
+     * Registrar Alquiler a un cliente:
+     * 
+     * Clases de equivalencia: 
+     * CE8: El alquiler del item no es valido 
+     */
+    
+    @Test
+    public void CE8Test() throws ExcepcionServiciosAlquiler{
+        ServiciosAlquiler sa=ServiciosAlquilerItemsStub.getInstance();
+        ExcepcionServiciosAlquiler ex=null;
+        Item i2=new Item(sa.consultarTipoItem(2), 12, "Halo 3", "Halo 3 es un videojuego de disparos en primera persona desarrollado por Bungie Studios.", java.sql.Date.valueOf("2007-09-08"), 3000, "DVD", "Shooter");
+        //prueba: 2 dias antes de la entrega
+        try{
+            
+            Item item = sa.consultarItem(0);
+            sa.registrarItem(i2);
+            sa.registrarAlquilerCliente(java.sql.Date.valueOf("2005-12-20"), 3666, item, -5);
+            
+        }catch(ExcepcionServiciosAlquiler e){
+            ex=e;
+        }finally{
+            assertEquals("El item no se registro correctamente",true,ex!=null);
+        }
+            
         
     }
     
