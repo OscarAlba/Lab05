@@ -227,10 +227,6 @@ public class ServiciosAlquilerItemsStub extends ServiciosAlquiler implements Ser
         return MULTA_DIARIA;
     }
 
-    
-    
-    
-    
     private void poblar() {
         
         TipoItem ti1=new TipoItem(1,"Video");
