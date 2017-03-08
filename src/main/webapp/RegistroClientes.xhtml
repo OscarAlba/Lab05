@@ -5,23 +5,23 @@
      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head><title>Tienda de Alquiler</title></h:head>
   <h:body>
-      <h:form id="Clientes" head="Clientes registrados">
+      <h:form id="Clientes">
           <p:layout style="min-width:600px;min-height:600px;">
               <p:layoutUnit position="center" header="Lista de Clientes registrados">
-                  <p:dataTable rowIndexVar="row" id="TablaClientes" var="Cliente"  value="#{AlquilerItems.consultarClientes}" action="" selection="#{AlquilerItems.selecCliente}"  selectionMode="single" rowKey="#{Cliente.documento}" style="margin-bottom:0">
-
+                  <p:dataTable rowIndexVar="row" id="TablaClientes" var="Cliente"  value="#{AlquilerItems.consultarClientes}" 
+                               selection="#{AlquilerItems.selecCliente}"  selectionMode="single" rowKey="#{Cliente.documento}" style="margin-bottom:0">
                       <p:column headerText="Nombre">
                           <h:outputText value="#{Cliente.nombre}"/>
                       </p:column>
                       <p:column headerText="Telefono">
                           <h:outputText value="#{Cliente.telefono}"/>
                       </p:column>
-
                       <p:column headerText="Documento">
                           <h:outputText value="#{Cliente.documento}"/>
                       </p:column>
                   </p:dataTable>
-                  
+                  <p:commandButton type="submit" value="Seleccionar cliente" action="RegistroClienteItem" />
+
                   <p:panel id="panel" header="Nuevo Cliente">
                       <h:panelGrid columns="2" cellpadding="5">
                           <p:outputLabel for="nombre" value="Nombre:" />
@@ -39,7 +39,7 @@
                           <p:outputLabel for="email" value="Email:" />
                           <p:inputText id="email" value="#{AlquilerItems.nuevoCliente.email}" label="Email"></p:inputText>
                       </h:panelGrid>
-                      <p:commandButton icon="ui-icon-check" value="Registrar cliente" update="TablaClientes,panel" actionListener="#{AlquilerItems.registrarNuevoCliente}" />
+                      <p:commandButton icon="ui-icon-check"  value="Registrar cliente" update="TablaClientes,panel" actionListener="#{AlquilerItems.registrarNuevoCliente}" />
                   </p:panel>
               </p:layoutUnit>
 
