@@ -24,20 +24,31 @@
                       <p:column headerText="Tarifa X dia">
                           <h:outputText value="#{Items.item.tarifaxDia }"/>
                       </p:column>
-                      <p:column headerText="Multa">
-                          <h:outputText value="#{AlquilerItems.getConsultarMultaAlquiler(Items.item.id)}"/>
-                      </p:column>
                   </p:dataTable>
                   <br/>
-                  <p:commandButton value="Registrar Nuevo Alquiler" update="ItemsClientes" actionListener="#{AlquilerItems.registrarNuevoAlquiler}" />
+                  <h:outputText value="Multa: #{AlquilerItems.total}" />
+                  <br/>
                   
-                  <p:panel id="panel" header="Nuevo Alquiler">
+                  <p:panel id="panelAlquiler" header="Nuevo Alquiler">
                       <h:panelGrid columns="2" cellpadding="5">
+                          <p:outputLabel for="codigo" value="Codigo:" />
+                          <p:inputText  id="codigo" value="#{AlquilerItems.nuevoItem.id}" label="Codigo"></p:inputText>
                           
+                          <p:outputLabel for="diasAlquiler" value="Dias de alquiler:" />
+                          <p:inputText  id="diasAlquiler" value="#{AlquilerItems.dias}" label="Dias de alquiler"></p:inputText>
+                         
+                          <p:outputLabel for="costo" value="Costo:" />
+                          <p:inputText  id="costo" value="#{AlquilerItems.costo}" label="Telefono"></p:inputText>
+                          
+                          <p:commandButton value="Registrar nuevo alquiler" update="TablaItems" actionListener="#{AlquilerItems.registrarAlquiler}" />
                       </h:panelGrid>
-                      <p:commandButton icon="ui-icon-check"  value="Registrar cliente" update="TablaClientes,panel" />
+                      
                   </p:panel>
+                  <p:commandButton type="submit" value="Atras" update="ItemsClientes" action="/RegistroClientes" />
+                  
               </p:layoutUnit>
+
+              
           </p:layout>
        </h:form>
 
