@@ -5,10 +5,17 @@
  */
 package edu.eci.pdsw.samples.managedbeans;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.ItemRentado;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosAlquiler;
 import edu.eci.pdsw.samples.services.ServiciosAlquiler;
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import static java.time.Instant.now;
+import static java.time.LocalDate.now;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -55,7 +62,10 @@ public class AlquilerItemsBean implements Serializable {
         nuevoCliente =new Cliente();
     }
     
-    
-    
-    
+    public List<ItemRentado> getConsultarItemsCliente() throws ExcepcionServiciosAlquiler {
+        return sp.consultarItemsCliente(selecCliente.getDocumento());
+    }
+    public long getConsultarMultaAlquiler(int iditem) throws ExcepcionServiciosAlquiler{
+        return sp.consultarMultaAlquiler(iditem,java.sql.Date.valueOf(LocalDate.now()));
+    };
 }

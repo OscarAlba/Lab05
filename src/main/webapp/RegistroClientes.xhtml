@@ -20,41 +20,28 @@
                           <h:outputText value="#{Cliente.documento}"/>
                       </p:column>
                   </p:dataTable>
-                  <p:commandButton type="submit" value="Seleccionar cliente" action="RegistroClienteItem" />
-
+                  <p:commandButton type="submit" value="Seleccionar cliente" update="Clientes" action="RegistroClienteItem" />
+                  <br/>
+                  
                   <p:panel id="panel" header="Nuevo Cliente">
                       <h:panelGrid columns="2" cellpadding="5">
                           <p:outputLabel for="nombre" value="Nombre:" />
-                          <p:inputText id="nombre" value="#{AlquilerItems.nuevoCliente.nombre}" label="Nombre"></p:inputText>
+                          <p:inputText  id="nombre" value="#{AlquilerItems.nuevoCliente.nombre}" label="Nombre"></p:inputText>
                           
                           <p:outputLabel for="documento" value="Dcumento:" />
-                          <p:inputText id="documento" value="#{AlquilerItems.nuevoCliente.documento}" label="Dcumento"></p:inputText>
+                          <p:inputText  id="documento" value="#{AlquilerItems.nuevoCliente.documento}" label="Dcumento"></p:inputText>
                          
                           <p:outputLabel for="telefono" value="Telefono:" />
-                          <p:inputText id="telefono" value="#{AlquilerItems.nuevoCliente.telefono}" label="Telefono"></p:inputText>
+                          <p:inputText  id="telefono" value="#{AlquilerItems.nuevoCliente.telefono}" label="Telefono"></p:inputText>
                           
                           <p:outputLabel for="direccion" value="Direccion:" />
-                          <p:inputText id="direccion" value="#{AlquilerItems.nuevoCliente.direccion}" label="Direccion"></p:inputText>
+                          <p:inputText  id="direccion" value="#{AlquilerItems.nuevoCliente.direccion}" label="Direccion"></p:inputText>
                          
                           <p:outputLabel for="email" value="Email:" />
-                          <p:inputText id="email" value="#{AlquilerItems.nuevoCliente.email}" label="Email"></p:inputText>
+                          <p:inputText  id="email" value="#{AlquilerItems.nuevoCliente.email}" label="Email"></p:inputText>
                       </h:panelGrid>
                       <p:commandButton icon="ui-icon-check"  value="Registrar cliente" update="TablaClientes,panel" actionListener="#{AlquilerItems.registrarNuevoCliente}" />
                   </p:panel>
-              </p:layoutUnit>
-
-              <p:layoutUnit position="east" header="Carro de compras" resizable="true" size="800">
-                  <p:dataTable id="TablaCarrito" var="Item"  value="#{beanEstadoShopping.carrito}">
-                      <p:column headerText="Nombre">
-                          
-                      </p:column>
-                      <p:column headerText="Cantidad">
-                          
-                      </p:column>
-                      <p:column headerText="Precio">
-                       
-                      </p:column>
-                  </p:dataTable>
               </p:layoutUnit>
           </p:layout>
        </h:form>

@@ -2,9 +2,44 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head></h:head>
-
+    <h:head><title>Items del cliente</title></h:head>
     <h:body>
+        <h:form id="ItemsClientes">
+          <p:layout style="min-width:600px;min-height:600px;">
+              <p:layoutUnit position="center" header="Lista de Items del cliente seleccionado">
+                  <p:dataTable id="TablaItems" var="Items"  value="#{AlquilerItems.consultarItemsCliente}">
+
+                      <p:column headerText="Nombre Item">
+                          <h:outputText value="#{Items.item.nombre}"/>
+                      </p:column>
+
+                      <p:column headerText="Fecha inicio de renta">
+                          <h:outputText value="#{Items.fechainiciorenta }"/>
+                      </p:column>
+
+                      <p:column headerText="Fecha fin de renta">
+                          <h:outputText value="#{Items.fechafinrenta}"/>
+                      </p:column>
+
+                      <p:column headerText="Tarifa X dia">
+                          <h:outputText value="#{Items.item.tarifaxDia }"/>
+                      </p:column>
+                      <p:column headerText="Multa">
+                          <h:outputText value="#{AlquilerItems.getConsultarMultaAlquiler(Items.item.id)}"/>
+                      </p:column>
+                  </p:dataTable>
+                  <br/>
+                  <p:commandButton value="Registrar Nuevo Alquiler" update="ItemsClientes" actionListener="#{AlquilerItems.registrarNuevoAlquiler}" />
+                  
+                  <p:panel id="panel" header="Nuevo Alquiler">
+                      <h:panelGrid columns="2" cellpadding="5">
+                          
+                      </h:panelGrid>
+                      <p:commandButton icon="ui-icon-check"  value="Registrar cliente" update="TablaClientes,panel" />
+                  </p:panel>
+              </p:layoutUnit>
+          </p:layout>
+       </h:form>
 
     </h:body>
 
