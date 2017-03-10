@@ -6,8 +6,8 @@
     <h:head><title>Tienda de Alquiler</title></h:head>
   <h:body>
       <h:form id="Clientes">
-          <p:layout style="min-width:600px;min-height:600px;">
-              <p:layoutUnit position="center" header="Lista de Clientes registrados">
+          <p:layout style="min-width:800px;min-height:800px;">
+              <p:layoutUnit resizable="true" position="center" header="Lista de Clientes registrados">
                   <p:dataTable rowIndexVar="row" id="TablaClientes" var="Cliente"  value="#{AlquilerItems.consultarClientes}" 
                                selection="#{AlquilerItems.selecCliente}"  selectionMode="single" rowKey="#{Cliente.documento}" style="margin-bottom:0">
                       <p:column headerText="Nombre">
@@ -22,28 +22,29 @@
                   </p:dataTable>
                   <p:commandButton type="submit" value="Seleccionar cliente"  update="Clientes" action="RegistroClienteItem" />
                   <br/>
-                  
-                  <p:panel id="panel" header="Nuevo Cliente">
+              </p:layoutUnit>
+              <p:layoutUnit position="south" header="Registrar nuevo Cliente" size="400" resizable="true">
+                  <p:panel id="panel" header="Cliente nuevo">
                       <h:panelGrid columns="2" cellpadding="5">
                           <p:outputLabel for="nombre" value="Nombre:" />
                           <p:inputText  id="nombre" value="#{AlquilerItems.nuevoCliente.nombre}" label="Nombre"></p:inputText>
-                          
+
                           <p:outputLabel for="documento" value="Dcumento:" />
                           <p:inputText  id="documento" value="#{AlquilerItems.nuevoCliente.documento}" label="Dcumento"></p:inputText>
-                         
+
                           <p:outputLabel for="telefono" value="Telefono:" />
                           <p:inputText  id="telefono" value="#{AlquilerItems.nuevoCliente.telefono}" label="Telefono"></p:inputText>
-                          
+
                           <p:outputLabel for="direccion" value="Direccion:" />
                           <p:inputText  id="direccion" value="#{AlquilerItems.nuevoCliente.direccion}" label="Direccion"></p:inputText>
-                         
+
                           <p:outputLabel for="email" value="Email:" />
                           <p:inputText  id="email" value="#{AlquilerItems.nuevoCliente.email}" label="Email"></p:inputText>
                       </h:panelGrid>
-                      <p:commandButton icon="ui-icon-check"  value="Registrar cliente" update="TablaClientes" actionListener="#{AlquilerItems.registrarNuevoCliente}" />
                   </p:panel>
+                  <p:commandButton value="Registrar cliente" update="Clientes" actionListener="#{AlquilerItems.registrarNuevoCliente}" />
               </p:layoutUnit>
           </p:layout>
-       </h:form>
-   </h:body>
+      </h:form>
+  </h:body>
 </html>

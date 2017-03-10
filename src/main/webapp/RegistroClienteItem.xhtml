@@ -5,10 +5,13 @@
     <h:head><title>Items del cliente</title></h:head>
     <h:body>
         <h:form id="ItemsClientes">
-          <p:layout style="min-width:600px;min-height:600px;">
-              <p:layoutUnit position="center" header="Lista de Items del cliente seleccionado">
+          <p:layout style="min-width:600px;min-height:750px;">
+              <p:layoutUnit resizable="true" position="center" header="Lista de Items en alquiler del cliente seleccionado">
                   <p:dataTable id="TablaItems" var="Items"  value="#{AlquilerItems.consultarItemsCliente}">
-
+                     
+                      <p:column headerText="ID item">
+                          <h:outputText value="#{Items.item.id}"/>
+                      </p:column>
                       <p:column headerText="Nombre Item">
                           <h:outputText value="#{Items.item.nombre}"/>
                       </p:column>
@@ -26,28 +29,32 @@
                       </p:column>
                   </p:dataTable>
                   <br/>
-                  <h:outputText value="Multa: #{AlquilerItems.total}" />
+                  <h:outputText value="Multa: #{AlquilerItems.consultarMultaAlquiler}" />
                   <br/>
-                  
-                  <p:panel id="panelAlquiler" header="Nuevo Alquiler">
+              </p:layoutUnit>
+              <p:layoutUnit resizable="true" position="south" header="Registrar nuevo Alquiler" size="550">
+                  <p:panel id="panelAlquiler" header="Item rentado">
+                      <p:dataTable id="ItemsD" var="ItemD"  value="#{AlquilerItems.consultarItemsDisponibles}">
+                          <p:column headerText="ID Items Disponibles">
+                            <h:outputText value="#{ItemD.id}"/>
+                          </p:column>
+                      </p:dataTable>
                       <h:panelGrid columns="2" cellpadding="5">
-                          <p:outputLabel for="codigo" value="Codigo:" />
-                          <p:inputText  id="codigo" value="#{AlquilerItems.nuevoItem.id}" label="Codigo"></p:inputText>
-                          
+                          <p:outputLabel for="codigo" value="Codigo de item:" />
+                          <p:inputText  id="codigo" value="#{AlquilerItems.codigoBarras}" label="Codigo"></p:inputText>
+
                           <p:outputLabel for="diasAlquiler" value="Dias de alquiler:" />
                           <p:inputText  id="diasAlquiler" value="#{AlquilerItems.dias}" label="Dias de alquiler"></p:inputText>
-                         
-                          <p:outputLabel for="costo" value="Costo:" />
-                          <p:inputText  id="costo" value="#{AlquilerItems.costo}" label="Telefono"></p:inputText>
                           
-                          <p:commandButton value="Registrar nuevo alquiler" update="TablaItems" actionListener="#{AlquilerItems.registrarAlquiler}" />
+                          <p:commandButton value="Consultar costo " update="costo" actionListener="#{AlquilerItems.consultarCostoAlquiler}" />
+                          <p:outputLabel id="costo" value="   #{AlquilerItems.costo} " />
+                          <br/>
                       </h:panelGrid>
-                      
+                      <p:commandButton value="Registrar nuevo alquiler" update="panelAlquiler,TablaItems" actionListener="#{AlquilerItems.registrarAlquiler}" />
                   </p:panel>
-                  <p:commandButton type="submit" value="Atras" update="ItemsClientes" action="/RegistroClientes" />
+                  <p:commandButton type="submit" value="Volver a registro de clientes"  update="ItemsClientes" action="RegistroClientes" />
                   
-              </p:layoutUnit>
-
+              </p:layoutUnit> 
               
           </p:layout>
        </h:form>

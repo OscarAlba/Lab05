@@ -24,6 +24,8 @@ public class Cliente implements Serializable{
     private ArrayList<ItemRentado> rentados; 
 
     public Cliente() {
+        this.vetado = false;
+        this.rentados = new ArrayList<>();
     }
 
     public Cliente(String nombre, long documento, String telefono, String direccion, String email, boolean vetado, ArrayList<ItemRentado> rentados) {   
